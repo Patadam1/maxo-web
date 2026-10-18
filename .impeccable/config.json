@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-18T18:47:16.097Z",
+        "reason": "finish reviewer: section padding is block-only with .wrap carrying inline gutters; screenshots show generous insets"
+      }
+    ]
+  }
+}
