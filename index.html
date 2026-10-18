@@ -285,7 +285,28 @@ p{margin:0;text-wrap:pretty}
 .js .olla:nth-child(2) .olla__plato{transition-delay:.12s}
 .js .olla:nth-child(3) .olla__plato{transition-delay:.24s}
 
+/* las fotos resurgen de las cenizas: debajo, la foto en ceniza; encima, el color sube con la brasa */
+.ceniza{position:relative;isolation:isolate}
+.ceniza::after{content:"";position:absolute;inset:0;z-index:0;background:var(--src) center/cover no-repeat;filter:grayscale(1) sepia(.2) brightness(.42) contrast(.85) blur(3px);opacity:0;transition:opacity .8s 1.4s}
+.olla__plato.ceniza::after{background-size:contain}
+.js .ceniza::after{opacity:1}
+.js .ceniza.en::after{opacity:0}
+.ceniza img{position:relative;z-index:1}
+.js .ceniza img{-webkit-mask:linear-gradient(to top,#000 44%,transparent 56%) 0 0/100% 250% no-repeat;mask:linear-gradient(to top,#000 44%,transparent 56%) 0 0/100% 250% no-repeat;transition:-webkit-mask-position 1.9s cubic-bezier(.45,0,.2,1),mask-position 1.9s cubic-bezier(.45,0,.2,1),scale 1.2s var(--ease)}
+.js .ceniza.en img{-webkit-mask-position:0 100%;mask-position:0 100%}
+.ceniza:not(.olla__plato)::before{content:"";position:absolute;left:-10%;right:-10%;top:calc(125% - 23px);height:46px;z-index:2;pointer-events:none;opacity:0;background:radial-gradient(60% 50% at 50% 50%,rgba(255,205,130,.95),rgba(255,110,30,.6) 40%,transparent 72%);filter:blur(4px);mix-blend-mode:screen}
+.js .ceniza.en:not(.olla__plato)::before{animation:brasa-sube 1.9s cubic-bezier(.45,0,.2,1) forwards}
+@keyframes brasa-sube{0%{top:calc(125% - 23px);opacity:0}15%{opacity:1}85%{opacity:.9}100%{top:calc(-25% - 23px);opacity:0}}
+.hogar__boca.ceniza img,.hogar__boca.ceniza::before{transition-delay:.5s;animation-delay:.5s}
+.foto:nth-child(2) .ceniza img,.foto:nth-child(2) .ceniza::before{transition-delay:0.14s;animation-delay:0.14s}
+.foto:nth-child(3) .ceniza img,.foto:nth-child(3) .ceniza::before{transition-delay:0.28s;animation-delay:0.28s}
+.foto:nth-child(4) .ceniza img,.foto:nth-child(4) .ceniza::before{transition-delay:0.42s;animation-delay:0.42s}
+.foto:nth-child(5) .ceniza img,.foto:nth-child(5) .ceniza::before{transition-delay:0.56s;animation-delay:0.56s}
+.foto:nth-child(6) .ceniza img,.foto:nth-child(6) .ceniza::before{transition-delay:0.70s;animation-delay:0.70s}
+
 @media (prefers-reduced-motion:reduce){
+  .js .ceniza img{-webkit-mask:none!important;mask:none!important;transition:none!important}
+  .ceniza::before,.ceniza::after{display:none}
   html{scroll-behavior:auto}
   .js .sube,.js .olla .olla__plato{opacity:1!important;translate:none!important;filter:none!important;scale:none!important;transition:none!important}
   .en .vapor path{animation:none;opacity:.45}
@@ -326,7 +347,7 @@ p{margin:0;text-wrap:pretty}
         </div>
       </div>
       <figure class="hogar">
-        <div class="hogar__boca"><img src="assets/fotos/olla-fuego.jpg" alt="Olla de barro puesta sobre las brasas de la lumbre de leña en Maxó" width="270" height="600" fetchpriority="high"></div>
+        <div class="hogar__boca ceniza"><img src="assets/fotos/olla-fuego.jpg" alt="Olla de barro puesta sobre las brasas de la lumbre de leña en Maxó" width="270" height="600" fetchpriority="high"></div>
         <figcaption>Nuestra lumbre, de verdad</figcaption>
       </figure>
     </div>
@@ -340,7 +361,7 @@ p{margin:0;text-wrap:pretty}
     </div>
     <ol class="wrap ollas">
       <li class="olla">
-        <div class="olla__plato">
+        <div class="olla__plato ceniza">
           <svg class="vapor" viewBox="0 0 100 100" aria-hidden="true"><path d="M30 95c-8-14 8-22 0-38s6-24 2-40"/><path d="M52 98c-9-15 9-24 1-40s7-26 3-44"/><path d="M72 95c-7-13 7-21 0-36s5-22 2-37"/></svg>
           <img src="assets/fotos/cazuela-cocido.png" alt="Cocido en olla de barro visto desde arriba: garbanzos, carne, chorizo, morcilla, patata y verdura" width="500" height="500" loading="lazy" data-gira="1">
         </div>
@@ -348,7 +369,7 @@ p{margin:0;text-wrap:pretty}
         <p>La carne tierna, la verdura suave y ese aroma ahumado que solo da el fuego de leña.</p>
       </li>
       <li class="olla">
-        <div class="olla__plato">
+        <div class="olla__plato ceniza">
           <svg class="vapor" viewBox="0 0 100 100" aria-hidden="true"><path d="M30 95c-8-14 8-22 0-38s6-24 2-40"/><path d="M52 98c-9-15 9-24 1-40s7-26 3-44"/><path d="M72 95c-7-13 7-21 0-36s5-22 2-37"/></svg>
           <img src="assets/fotos/cazuela-fabada.png" alt="Fabada en olla de barro con alubias, chorizo, morcilla y panceta" width="500" height="500" loading="lazy" data-gira="-1">
         </div>
@@ -356,7 +377,7 @@ p{margin:0;text-wrap:pretty}
         <p>Cada ingrediente se funde a fuego lento, con el sabor tradicional que le da el humo de la leña.</p>
       </li>
       <li class="olla">
-        <div class="olla__plato">
+        <div class="olla__plato ceniza">
           <svg class="vapor" viewBox="0 0 100 100" aria-hidden="true"><path d="M30 95c-8-14 8-22 0-38s6-24 2-40"/><path d="M52 98c-9-15 9-24 1-40s7-26 3-44"/><path d="M72 95c-7-13 7-21 0-36s5-22 2-37"/></svg>
           <img src="assets/fotos/cazuela-arroz.png" alt="Arroz caldoso con bogavante en cazuela de barro" width="500" height="500" loading="lazy" data-gira="1">
         </div>
@@ -381,25 +402,25 @@ p{margin:0;text-wrap:pretty}
           <h3>Guisos caseros</h3>
           <p>Platos de cuchara de los de toda la vida, hechos despacio en olla de barro.</p>
           <div class="plato__hueco" aria-hidden="true"></div>
-          <div class="plato__foto"><img src="assets/fotos/fabada-plato.jpg" alt="Plato de fabada casera" width="270" height="600" loading="lazy"></div>
+          <div class="plato__foto ceniza"><img src="assets/fotos/fabada-plato.jpg" alt="Plato de fabada casera" width="270" height="600" loading="lazy"></div>
         </li>
         <li class="plato" data-foto="assets/fotos/olla-fuego.jpg">
           <h3>Carnes a la brasa</h3>
           <p>Hechas sobre la leña, con su punto de humo y patatas al lado.</p>
           <div class="plato__hueco" aria-hidden="true"></div>
-          <div class="plato__foto"><img src="assets/fotos/olla-fuego.jpg" alt="Brasas de leña encendidas en la lumbre de Maxó" width="270" height="600" loading="lazy"></div>
+          <div class="plato__foto ceniza"><img src="assets/fotos/olla-fuego.jpg" alt="Brasas de leña encendidas en la lumbre de Maxó" width="270" height="600" loading="lazy"></div>
         </li>
         <li class="plato" data-foto="assets/fotos/carne-patatas.jpg">
           <h3>Menú del día</h3>
           <p>Cocina casera que cambia cada día. Llama y te contamos qué hay hoy en la olla.</p>
           <div class="plato__hueco" aria-hidden="true"></div>
-          <div class="plato__foto"><img src="assets/fotos/carne-patatas.jpg" alt="Carne con patatas fritas y pimientos" width="270" height="600" loading="lazy"></div>
+          <div class="plato__foto ceniza"><img src="assets/fotos/carne-patatas.jpg" alt="Carne con patatas fritas y pimientos" width="270" height="600" loading="lazy"></div>
         </li>
         <li class="plato" data-foto="assets/fotos/tartas.jpg">
           <h3>Postres caseros</h3>
           <p>Para terminar como se termina en casa: con algo dulce hecho aquí.</p>
           <div class="plato__hueco" aria-hidden="true"></div>
-          <div class="plato__foto"><img src="assets/fotos/tartas.jpg" alt="Porciones de tarta de queso casera" width="270" height="600" loading="lazy"></div>
+          <div class="plato__foto ceniza"><img src="assets/fotos/tartas.jpg" alt="Porciones de tarta de queso casera" width="270" height="600" loading="lazy"></div>
         </li>
       </ul>
       <ul class="ademas sube" aria-label="Además">
@@ -427,12 +448,12 @@ p{margin:0;text-wrap:pretty}
       </div>
     </div>
     <div class="tira" tabindex="0" aria-label="Fotos de nuestros platos">
-      <figure class="foto"><div class="foto__img"><img src="assets/fotos/olla-fuego.jpg" alt="Olla de barro sobre las brasas" width="270" height="600" loading="lazy"></div><figcaption>La olla, en la lumbre</figcaption></figure>
-      <figure class="foto"><div class="foto__img"><img src="assets/fotos/torreznos-olla.jpg" alt="Panceta dorada en olla de barro" width="270" height="600" loading="lazy"></div><figcaption>Panceta en olla de barro</figcaption></figure>
-      <figure class="foto"><div class="foto__img"><img src="assets/fotos/fabada-plato.jpg" alt="Plato de fabada" width="270" height="600" loading="lazy"></div><figcaption>Fabada</figcaption></figure>
-      <figure class="foto"><div class="foto__img"><img src="assets/fotos/carne-patatas.jpg" alt="Carne con patatas fritas y pimientos" width="270" height="600" loading="lazy"></div><figcaption>Carne con patatas y pimientos</figcaption></figure>
-      <figure class="foto"><div class="foto__img"><img src="assets/fotos/bacalao.jpg" alt="Bacalao rebozado" width="270" height="600" loading="lazy"></div><figcaption>Bacalao rebozado</figcaption></figure>
-      <figure class="foto"><div class="foto__img"><img src="assets/fotos/tartas.jpg" alt="Tarta de queso casera" width="270" height="600" loading="lazy"></div><figcaption>Tarta de queso casera</figcaption></figure>
+      <figure class="foto"><div class="foto__img ceniza"><img src="assets/fotos/olla-fuego.jpg" alt="Olla de barro sobre las brasas" width="270" height="600" loading="lazy"></div><figcaption>La olla, en la lumbre</figcaption></figure>
+      <figure class="foto"><div class="foto__img ceniza"><img src="assets/fotos/torreznos-olla.jpg" alt="Panceta dorada en olla de barro" width="270" height="600" loading="lazy"></div><figcaption>Panceta en olla de barro</figcaption></figure>
+      <figure class="foto"><div class="foto__img ceniza"><img src="assets/fotos/fabada-plato.jpg" alt="Plato de fabada" width="270" height="600" loading="lazy"></div><figcaption>Fabada</figcaption></figure>
+      <figure class="foto"><div class="foto__img ceniza"><img src="assets/fotos/carne-patatas.jpg" alt="Carne con patatas fritas y pimientos" width="270" height="600" loading="lazy"></div><figcaption>Carne con patatas y pimientos</figcaption></figure>
+      <figure class="foto"><div class="foto__img ceniza"><img src="assets/fotos/bacalao.jpg" alt="Bacalao rebozado" width="270" height="600" loading="lazy"></div><figcaption>Bacalao rebozado</figcaption></figure>
+      <figure class="foto"><div class="foto__img ceniza"><img src="assets/fotos/tartas.jpg" alt="Tarta de queso casera" width="270" height="600" loading="lazy"></div><figcaption>Tarta de queso casera</figcaption></figure>
     </div>
   </section>
 
@@ -570,7 +591,7 @@ if (!tactil) { const a = document.querySelector('[data-atiza]'); if (a) a.textCo
    ============================================================ */
 const FRAG = `
 precision mediump float;
-uniform vec2 uRes; uniform float uT; uniform float uHeat; uniform vec2 uPtr; uniform float uPtrAmt; uniform float uLevel;
+uniform vec2 uRes; uniform float uT; uniform float uFlow; uniform float uHeat; uniform vec2 uPtr; uniform float uPtrAmt; uniform float uLevel;
 float h(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float n(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.0-2.0*f);
   return mix(mix(h(i), h(i+vec2(1,0)), f.x), mix(h(i+vec2(0,1)), h(i+vec2(1,1)), f.x), f.y); }
@@ -590,7 +611,7 @@ void main(){
   float bump = uPtrAmt * exp(-dx*dx*6.0);
   float tongues = fbm(vec2(p.x * 2.6, uT * 0.35));
   float height = uLevel * (0.62 + 0.22*uHeat) * (0.55 + tongues) + bump * 0.42;
-  vec2 q = vec2(p.x * 3.2, p.y * 2.4 - uT * (1.5 + uHeat*0.8));
+  vec2 q = vec2(p.x * 3.2, p.y * 2.4 - uFlow);
   float n1 = fbm(q);
   float n2 = fbm(q * 1.8 + vec2(n1 * 1.6, -uT * 0.7));
   float k = mix(n1, n2, 0.55);
@@ -616,8 +637,8 @@ function hacerFuego(canvas, { escala = 0.5 } = {}) {
   const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
   const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-  const U = {}; ['uRes','uT','uHeat','uPtr','uPtrAmt','uLevel'].forEach(k => U[k] = gl.getUniformLocation(pr, k));
-  const st = { heat: 0, ptrX: .5, ptrAmt: 0, level: 1, t: Math.random() * 50 };
+  const U = {}; ['uRes','uT','uFlow','uHeat','uPtr','uPtrAmt','uLevel'].forEach(k => U[k] = gl.getUniformLocation(pr, k));
+  const st = { heat: 0, ptrX: .5, ptrAmt: 0, level: 1, t: Math.random() * 50, flow: Math.random() * 50 };
   const tam = () => {
     const r = canvas.getBoundingClientRect();
     canvas.width = Math.max(2, Math.round(r.width * escala)); canvas.height = Math.max(2, Math.round(r.height * escala));
@@ -625,7 +646,7 @@ function hacerFuego(canvas, { escala = 0.5 } = {}) {
   };
   tam(); addEventListener('resize', tam);
   st.dibuja = () => {
-    gl.uniform2f(U.uRes, canvas.width, canvas.height); gl.uniform1f(U.uT, st.t); gl.uniform1f(U.uHeat, st.heat);
+    gl.uniform2f(U.uRes, canvas.width, canvas.height); gl.uniform1f(U.uT, st.t); gl.uniform1f(U.uFlow, st.flow); gl.uniform1f(U.uHeat, st.heat);
     gl.uniform2f(U.uPtr, st.ptrX, 0); gl.uniform1f(U.uPtrAmt, st.ptrAmt); gl.uniform1f(U.uLevel, st.level);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   };
@@ -680,8 +701,9 @@ function avivar(e, sec, f) {
   ultimo = { x: e.clientX, y: e.clientY };
   if (!f) return;
   f.ptrX = x / r.width;
-  f.ptrAmt = Math.min(1, f.ptrAmt + v / 260);
-  f.heat = Math.min(1, f.heat + v / 900);
+  const k = Math.min(v, 60);
+  f.ptrAmt = Math.min(1, f.ptrAmt + k / 400);
+  f.heat = Math.min(.8, f.heat + k / 1500);
   if (sec === hero && !quieto) {
     const n = Math.min(6, Math.floor(v / 14));
     for (let i = 0; i < n; i++) chispas.nace(x + (Math.random() - .5) * 20, Math.min(y, r.height * .95), (Math.random() - .5) * 60, -60 - Math.random() * 80, true);
@@ -699,7 +721,7 @@ function bucle(now) {
   for (const x of fuegos) {
     if (!x.f || !x.visible) continue;
     const f = x.f;
-    f.t += dt * (1 + f.heat * .6);
+    f.t += dt; f.flow += dt * (1.5 + f.heat * .9);
     f.heat *= Math.pow(.35, dt); f.ptrAmt *= Math.pow(.25, dt);
     if (x.c.dataset.fuego === 'portada') f.level = (innerWidth < 861 ? .64 : .86) * (1 - prog * .7);
     else { const r = x.sec.getBoundingClientRect(); const v = Math.min(1, Math.max(0, (innerHeight - r.top) / (r.height + innerHeight * .2))); f.level = .3 + v * .55; }
@@ -716,7 +738,8 @@ addEventListener('resize', () => { if (quieto) fuegos.forEach(x => x.f && x.f.di
    ENTRADAS, CAZUELAS QUE GIRAN, FOTO QUE SIGUE AL RATÓN
    ============================================================ */
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('en'); io.unobserve(e.target); } }), { threshold: .18, rootMargin: '0px 0px -6% 0px' });
-$$('.sube, .olla').forEach(el => io.observe(el));
+$$('.ceniza').forEach(el => { const i = el.querySelector('img'); if (i) el.style.setProperty('--src', `url("${i.getAttribute('src')}")`); });
+$$('.sube, .olla, .ceniza').forEach(el => io.observe(el));
 
 const giran = $$('[data-gira]');
 const bar = document.getElementById('bar'), movil = document.getElementById('movil'), finalCta = document.querySelector('.visita');

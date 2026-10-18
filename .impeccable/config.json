@@ -11,6 +11,24 @@
         ],
         "createdAt": "2026-10-18T18:47:16.097Z",
         "reason": "finish reviewer: section padding is block-only with .wrap carrying inline gutters; screenshots show generous insets"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#000",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-18T19:00:02.794Z",
+        "reason": "mask-image stop for the ash reveal, never painted"
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-18T19:00:02.805Z",
+        "reason": "user asked for photos rising from the ashes: the ember line is literal fire light"
       }
     ]
   }
